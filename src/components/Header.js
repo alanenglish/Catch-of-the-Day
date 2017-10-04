@@ -1,11 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Header extends Component {
-  render() {
-    return (
-      <p>Header</p>
-    );
-  }
+// if you dont need other methods other than render, it doesnt make sense to use
+// entire react component - use stateless functional component
+// will need to get props passed into to use
+const Header = (props) => {
+  return (
+    <header className="top">
+      <h1>
+        Catch
+        <span className="ofThe">
+          <span className="of">of</span>
+          <span className="the">the</span>
+        </span>
+        Day
+      </h1>
+      <h3 className="tagline"><span>{props.tagline}</span></h3>
+    </header>
+  );
 }
 
 export default Header;
