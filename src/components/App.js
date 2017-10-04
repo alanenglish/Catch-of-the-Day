@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import Fish from './Fish';
 import sampleFishes from '../sample-fishes';
 
 class App extends Component {
@@ -39,6 +40,15 @@ class App extends Component {
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
+          <ul className="list-of-fishes">
+            {/* map over object by using Object.keys of the fishes piece of state */}
+            {/* set key as key (should be unique) and then send details prop for each key */}
+            {
+              Object
+              .keys(this.state.fishes)
+              .map(key => <Fish key={key} details={this.state.fishes[key] } />)
+            }
+          </ul>
         </div>
         <Order />
         <Inventory
