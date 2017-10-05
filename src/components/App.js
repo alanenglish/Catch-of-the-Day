@@ -128,4 +128,8 @@ class App extends Component {
   }
 }
 
+App.proptypes = {
+  params: React.PropTypes.object.isRequired
+}
+
 export default App;
