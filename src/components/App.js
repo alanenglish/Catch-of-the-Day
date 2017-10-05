@@ -9,11 +9,12 @@ import base from '../base';
 class App extends Component {
   constructor() {
     super();
-
+    // can change function to use fat arrow and eliminate the need to bind
+    // see loadSamples function below
     this.addFish = this.addFish.bind(this);
     this.removeFish = this.removeFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
+    // this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
   }
@@ -73,11 +74,11 @@ class App extends Component {
     this.setState({ fishes });
   }
 
-  loadSamples() {
+  loadSamples = () => {
     this.setState({
       fishes: sampleFishes
     });
-  }
+  };
 
   addToOrder(key) {
     // take a copy of our state
