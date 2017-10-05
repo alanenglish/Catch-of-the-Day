@@ -11,10 +11,11 @@ class App extends Component {
     super();
 
     this.addFish = this.addFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
-    this.removeFish = this.removeFish.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
     // initial state
     this.state = {
       fishes: {},
@@ -86,6 +87,12 @@ class App extends Component {
     this.setState({ order: order })
   }
 
+  removeFromOrder(key) {
+    const order = {...this.state.order};
+    delete order[key];
+    this.setState({ order });
+  }
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -105,6 +112,7 @@ class App extends Component {
           fishes={this.state.fishes}
           order={this.state.order}
           params={this.props.params}
+          removeFromOrder={this.removeFromOrder}
         />
         <Inventory
           loadSamples={this.loadSamples}
