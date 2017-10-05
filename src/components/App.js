@@ -16,12 +16,13 @@ class App extends Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.removeFromOrder = this.removeFromOrder.bind(this);
-    // initial state
-    this.state = {
-      fishes: {},
-      order: {}
-    }
   }
+
+  // initial state
+  state = {
+    fishes: {},
+    order: {}
+  };
 
   componentWillMount() {
     // this runs right before the app is rendered
@@ -29,11 +30,11 @@ class App extends Component {
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
       context: this,
       state: 'fishes'
-    })
+    });
     // check if there is any order in localStorage
     const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
 
-    if(localStorage) {
+    if(localStorageRef) {
       // update our App components order state
       this.setState({
         order: JSON.parse(localStorageRef)
@@ -51,7 +52,7 @@ class App extends Component {
 
   addFish(fish) {
     // update our state - keep current copy and update
-    const fishes = {...this.state.fishes}
+    const fishes = {...this.state.fishes};
     // add in our new fish
     const timestamp = Date.now();
     // assign new fish a unique id
@@ -63,7 +64,7 @@ class App extends Component {
   updateFish(key, updatedFish) {
     const fishes = {...this.state.fishes};
     fishes[key] = updatedFish;
-    this.setState({ fishes })
+    this.setState({ fishes });
   }
 
   removeFish(key) {
@@ -84,7 +85,7 @@ class App extends Component {
     // update or add new number of fish ordered
     order[key] = order[key] +1 || 1;
     // update our state
-    this.setState({ order: order })
+    this.setState({ order: order });
   }
 
   removeFromOrder(key) {
@@ -120,10 +121,15 @@ class App extends Component {
           fishes={this.state.fishes}
           updateFish={this.updateFish}
           removeFish={this.removeFish}
+          storeId={this.props.params.storeId}
         />
       </div>
     );
   }
+}
+
+App.proptypes = {
+  params: React.PropTypes.object.isRequired
 }
 
 export default App;
